@@ -19,6 +19,10 @@ public class Aula {
 	private List<Alumno> Alumnos;
 	
 	public Aula(){}
+	
+	public Aula(int codigo){
+		Cod_Aula = codigo;
+	}
 
 	public int getCod_Aula() {
 		return Cod_Aula;

@@ -1,8 +1,12 @@
 package Models;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "Alumno")
@@ -21,6 +25,22 @@ public class Alumno implements Serializable {
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="Cod_Aula")
 	private Aula Aula;
+	
+	@ManyToMany
+    @JoinTable(
+      name="Matricula",
+      joinColumns=@JoinColumn(name="Alumno", referencedColumnName="NIF"),
+      inverseJoinColumns=@JoinColumn(name="Cod_Asig", referencedColumnName="Cod_Asig"))
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Asignatura> Asignaturas;
+	
+	@ManyToMany
+    @JoinTable(
+      name="Enseña",
+      joinColumns=@JoinColumn(name="Alumno", referencedColumnName="NIF"),
+      inverseJoinColumns=@JoinColumn(name="Profesor", referencedColumnName="NIF"))
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Profesor> Profesores;
 	
 	public Alumno(){
 		
@@ -64,6 +84,22 @@ public class Alumno implements Serializable {
 
 	public void setAula(Aula aula) {
 		Aula = aula;
+	}
+
+	public List<Asignatura> getAsignaturas() {
+		return Asignaturas;
+	}
+
+	public void setAsignaturas(List<Asignatura> asignaturas) {
+		Asignaturas = asignaturas;
+	}
+
+	public List<Profesor> getProfesores() {
+		return Profesores;
+	}
+
+	public void setProfesores(List<Profesor> profesores) {
+		Profesores = profesores;
 	}
 
 	@Override

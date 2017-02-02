@@ -5,11 +5,13 @@ import Models.*;
 
 public class Main {
 	public static void main(String args[]) {
-		AulaDAO dao = new AulaDAO();
+		AsignaturaDAO dao = new AsignaturaDAO();
+		AlumnoDAO alumnoDAO = new AlumnoDAO();		
 		
-		Aula a = dao.get(1);
-		for(Alumno al : a.getAlumnos())
-			System.out.println(al);
+		for(Profesor p : alumnoDAO.get("26266549C").getProfesores())
+			System.out.println(p);
+		
+		
 		
 	}
 }
