@@ -5,87 +5,38 @@ import java.util.List;
 import org.hibernate.*;
 
 import Common.HibernateUtil;
+import Models.Alumno;
 import Models.Asignatura;
+import Models.Asignatura;
+import Models.Aula;
 
 public class AsignaturaDAO extends GenericDAO {
+
+	public AsignaturaDAO() {
+		super(Asignatura.class);
+	}
 	
-
-	public String save(Asignatura Asignatura) throws HibernateException {
-		String id = "";
-
-		try {
-			iniciaOperacion();
-			id = (String) sesion.save(Asignatura);
-			tx.commit();
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-			throw he;
-		} finally {
-			if (sesion != null)
-				sesion.close();
-		}
-
-		return id;
+	public String save(Asignatura Object) throws HibernateException {
+		return super.save(Object);
 	}
 
-	public void update(Asignatura Asignatura) throws HibernateException {
-		try {
-			iniciaOperacion();
-			sesion.update(Asignatura);
-			tx.commit();
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-			throw he;
-		} finally {
-			sesion.close();
-		}
+	public void update(Asignatura Object) throws HibernateException {
+		super.update(Object);
 	}
 
-	public void delete(Asignatura Asignatura) throws HibernateException {
-		try {
-			iniciaOperacion();
-			sesion.delete(Asignatura);
-			tx.commit();
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-			throw he;
-		} finally {
-			sesion.close();
-		}
+	public void delete(Asignatura Object) throws HibernateException {
+		super.delete(Object);
 	}
 
-	public Asignatura get(int idAsignatura) throws HibernateException {
-		Asignatura Asignatura = null;
-		try {
-			iniciaOperacion();
-			Asignatura = (Asignatura) sesion.get(Asignatura.class, idAsignatura);
-		} finally {
-			sesion.close();
-		}
-
-		return Asignatura;
+	public Asignatura get(String idObject) throws HibernateException {
+		return (Asignatura) super.get(idObject);
+	}
+	
+	public Asignatura get(int idObject) throws HibernateException {
+		return (Asignatura) super.get(idObject);
 	}
 
 	public List<Asignatura> find() throws HibernateException {
-		List<Asignatura> listaAsignaturas = null;
-
-		try {
-			iniciaOperacion();
-			listaAsignaturas = sesion.createQuery("from Asignatura").list();
-		} finally {
-			sesion.close();
-		}
-
-		return listaAsignaturas;
-	}
-
-	private void iniciaOperacion() throws HibernateException {
-		sesion = HibernateUtil.getSessionFactory().openSession();
-		tx = sesion.beginTransaction();
-	}
-
-	private void manejaExcepcion(HibernateException he) throws HibernateException {
-		tx.rollback();
-		throw new HibernateException("Ocurrió un error en la capa de acceso a datos", he);
+		return super.find(Asignatura.class.getName());
 	}
 }
