@@ -1,14 +1,25 @@
 package Main;
 
-import DAO.*;
-import Models.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
+
+import DAO.ProfesorDAO;
+
 
 public class Main {
+	
+	
 	public static void main(String args[]) {
-		ProfesorDAO dao = new ProfesorDAO();
+		
+		ApplicationContext context =new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+		
+		ProfesorDAO dao=context.getBean(ProfesorDAO.class);
 
-		for (Profesor p : dao.find())
-			System.out.println(p);
+		
+		dao.probando();
+		
 
 	}
 }

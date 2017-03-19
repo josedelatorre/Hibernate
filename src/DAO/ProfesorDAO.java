@@ -2,13 +2,21 @@ package DAO;
 
 import java.util.List;
 
-import org.hibernate.*;
+import org.hibernate.HibernateException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import Common.HibernateUtil;
 import Models.Alumno;
 import Models.Profesor;
 
+@Component
 public class ProfesorDAO extends GenericDAO {
+	
+	@Autowired
+	private Profesor profesor;
+	
+	@Autowired
+	private Alumno alumno;
 	
 	public ProfesorDAO(){
 		super(Profesor.class);
@@ -36,6 +44,12 @@ public class ProfesorDAO extends GenericDAO {
 
 	public List<Profesor> find() throws HibernateException {
 		return super.find(Profesor.class.getName());
+	}
+
+	public void probando(){
+		profesor.probando();
+		alumno.setNombre("Pepe");
+		System.out.println(alumno);
 	}
 	
 }

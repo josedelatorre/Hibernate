@@ -3,11 +3,21 @@ package Models;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.stereotype.Component;
 
+@Component
 @Entity
 @Table(name = "Profesor")
 public class Profesor implements Serializable {
@@ -87,6 +97,11 @@ public class Profesor implements Serializable {
 	@Override
 	public String toString() {
 		return "Profesor [NIF=" + NIF + ", Nombre=" + Nombre + ", Apellidos=" + Apellidos + "]";
+	}
+	
+
+	public void probando(){
+		System.out.println("Hola holita");
 	}
 
 }
